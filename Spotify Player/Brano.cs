@@ -93,9 +93,9 @@ namespace Spotify_Player {
 
         public void Stop() {
             if (Feat) {
-                Console.WriteLine("Il brano " + TitoloBrano + " Feat: " + FeatNome + " è stato stoppato");
+                Console.WriteLine("Il brano " + TitoloBrano + " Feat: " + FeatNome + " è stato fermato");
             } else {
-                Console.WriteLine("Il brano " + TitoloBrano + " è stato stoppato");
+                Console.WriteLine("Il brano " + TitoloBrano + " è stato fermato");
             }
         }
         public override string ToString() {
