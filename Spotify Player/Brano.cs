@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Spotify_Player {
-    public class Brano:IContenutoRiproducibile {
+    public class Brano : IContenutoRiproducibile {
 
         private string TitoloBrano;
         private bool Feat;
@@ -14,7 +14,7 @@ namespace Spotify_Player {
         private string Autore;
         private List<string> Genere;
 
-        public Brano(string TitoloBrano,uint Durata, string Autore, List<string> Generi, string Feat = "") {
+        public Brano(string TitoloBrano, uint Durata, string Autore, List<string> Generi, string Feat = "") {
             this.Autore = Autore;
             this.TitoloBrano = TitoloBrano;
             this.Durata = Durata;
@@ -26,7 +26,7 @@ namespace Spotify_Player {
             if (string.IsNullOrWhiteSpace(Autore)) {
                 Console.WriteLine("Hai inserito un autore non valido");
             } else {
-                this.Autore=Autore;
+                this.Autore = Autore;
             }
         }
 
@@ -34,7 +34,7 @@ namespace Spotify_Player {
             if (string.IsNullOrWhiteSpace(Titolo)) {
                 Console.WriteLine("Hai inserito un titolo non valido");
             } else {
-                TitoloBrano= Titolo;
+                TitoloBrano = Titolo;
             }
         }
         public void SetDurata(uint durata) {
@@ -42,18 +42,21 @@ namespace Spotify_Player {
         }
 
         public void SetFeat(string feat) {
-            if(string.IsNullOrEmpty(feat)) {
+            if (string.IsNullOrEmpty(feat)) {
                 Feat = false;
             } else {
-                FeatNome= feat;
+                FeatNome = feat;
                 Feat = true;
             }
         }
+        public void SetGenere(List<string> Genere) {
+            this.Genere = Genere;
+        }
 
         public string GetTitoloBrano() {
-        return TitoloBrano;
+            return TitoloBrano;
         }
-        public uint GetDurata() { 
+        public uint GetDurata() {
             return Durata;
         }
         public string GetFeatName() {
@@ -63,14 +66,46 @@ namespace Spotify_Player {
         public string GetAutore() {
             return Autore;
         }
+        public string GetGenere() {
+            string ListaGeneri = "";
+            foreach (var genere in Genere) {
+                ListaGeneri += genere + " ";
+            }
+            return ListaGeneri;
+        }
 
         public void Play() {
             if (Feat) {
-                Console.WriteLine("Riproduzione del brano: " + TitoloBrano);
+                Console.WriteLine("Riproduzione del brano: " + TitoloBrano + "di " + Autore + " Feat: " + FeatNome);
             } else {
-                Console.WriteLine("Riproduzione del brano: " + TitoloBrano + " Feat: " + FeatNome);
+                Console.WriteLine("Riproduzione del brano: " + TitoloBrano+ " di " + Autore);
             }
-            
+
+        }
+        public void Pause() {
+            if (Feat) {
+                Console.WriteLine("Il brano " + TitoloBrano + " di " + Autore + " Feat: " + FeatNome + " è stato messo in pausa");
+            } else {
+                Console.WriteLine("Il brano " + TitoloBrano +" di "+ Autore+ " è stato messo in pausa");
+            }
+
+        }
+
+        public void Stop() {
+            if (Feat) {
+                Console.WriteLine("Il brano " + TitoloBrano + " Feat: " + FeatNome + " è stato stoppato");
+            } else {
+                Console.WriteLine("Il brano " + TitoloBrano + " è stato stoppato");
+            }
+        }
+        public override string ToString() {
+            string Print = "------------------------------------\n";
+            Print += "Autore: " + Autore+"\n";
+            Print += "Titolo del brano: " + TitoloBrano+"\n";
+            Print += "Genere: "+GetGenere() + "\n";
+            Print += "Durata: " + Durata +" secondi\n";
+            Print += "------------------------------------\n";
+            return Print;
         }
     }
 }
