@@ -14,6 +14,7 @@ namespace Spotify_Player {
         private uint EpisodioDurata;
         private List<string> Genere;
 
+        public Podcast() { }
         public Podcast(string PodcastTitolo, List<string> PodcastHost, string PodcastProduttore, string EpisodioTitolo, uint EpisodioDurata, List<string> Genere) {
             this.PodcastTitolo = PodcastTitolo;
             this.PodcastHost = PodcastHost;
@@ -23,6 +24,7 @@ namespace Spotify_Player {
             this.Genere = Genere;
         }
 
+        //Getters
         public string GetPodcastTitolo() {
             return PodcastTitolo;
         }
@@ -51,6 +53,42 @@ namespace Spotify_Player {
             return ListaGeneri;
         }
 
+
+        //Setters
+        public void SetPodcastNome(string titolo) {
+            if (string.IsNullOrWhiteSpace(titolo)) {
+                throw new Exception();
+            } else {
+                PodcastTitolo = titolo;
+            }
+        }
+        public void SetPodcastHost(List<string> listaHost) {
+            PodcastHost = listaHost;
+        }
+        public void SetPodcastProduttore(string Produttore) {
+
+            if (string.IsNullOrWhiteSpace(Produttore)) {
+                throw new Exception();
+            } else {
+                PodcastProduttore = Produttore;
+            }
+        }
+        public void SetEpisodioTitolo(string EpisodioTitolo) {
+            if (string.IsNullOrWhiteSpace(EpisodioTitolo)) {
+                throw new Exception();
+            } else {
+                this.EpisodioTitolo = EpisodioTitolo;
+            }
+        }
+        public void SetEpisodioDurata(uint EpisodioDurata) {
+            this.EpisodioDurata = EpisodioDurata;
+        }
+        public void SetGenere(List<string> Genere) {
+            this.Genere = Genere;
+        }
+
+
+        //Metodi
         public void Play() {
             Console.WriteLine("Riproduzione del Podcast: " + PodcastTitolo + " di " + GetPodcastHost() + "episodio " + EpisodioTitolo);
         }
@@ -63,7 +101,8 @@ namespace Spotify_Player {
         public override string ToString() {
             string Print = "------------------------------------\n";
             Print += "Scheda Podcast\n";
-            Print += "Autore: " + GetPodcastHost() + "\n";
+            Print += "Podcast nome: " + PodcastTitolo + "\n";
+            Print += "Hosts: " + GetPodcastHost() + "\n";
             Print += "Produttore: " + PodcastProduttore+"\n";
             Print += "Titolo dell' episodio: " + EpisodioTitolo + "\n";
             Print += "Genere: " + GetGenere() + "\n";

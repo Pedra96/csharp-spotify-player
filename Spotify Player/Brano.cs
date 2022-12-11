@@ -14,6 +14,8 @@ namespace Spotify_Player {
         private string Autore;
         private List<string> Genere;
 
+        public Brano() { }
+
         public Brano(string TitoloBrano, uint Durata, string Autore, List<string> Generi, string Feat = "") {
             this.Autore = Autore;
             this.TitoloBrano = TitoloBrano;
@@ -24,7 +26,7 @@ namespace Spotify_Player {
 
         public void SetAutore(string Autore) {
             if (string.IsNullOrWhiteSpace(Autore)) {
-                Console.WriteLine("Hai inserito un autore non valido");
+                throw new Exception();
             } else {
                 this.Autore = Autore;
             }
@@ -32,7 +34,7 @@ namespace Spotify_Player {
 
         public void SetTitoloBrano(string Titolo) {
             if (string.IsNullOrWhiteSpace(Titolo)) {
-                Console.WriteLine("Hai inserito un titolo non valido");
+               throw new Exception();
             } else {
                 TitoloBrano = Titolo;
             }
@@ -42,10 +44,12 @@ namespace Spotify_Player {
         }
 
         public void SetFeat(string feat) {
-            if (string.IsNullOrEmpty(feat)) {
+            if (string.IsNullOrEmpty(feat)||feat=="no") {
                 Feat = false;
-            } else {
-                FeatNome = feat;
+            }
+            else {
+                Console.WriteLine("Inserire nome del Feat");
+                FeatNome = Console.ReadLine();
                 Feat = true;
             }
         }
@@ -100,8 +104,12 @@ namespace Spotify_Player {
         }
         public override string ToString() {
             string Print = "------------------------------------\n";
+            Print += "Scheda Brano\n";
             Print += "Autore: " + Autore+"\n";
             Print += "Titolo del brano: " + TitoloBrano+"\n";
+            if(Feat) {
+                Print += "Feat: " + FeatNome+"\n";
+            }
             Print += "Genere: "+GetGenere() + "\n";
             Print += "Durata: " + Durata +" secondi\n";
             Print += "------------------------------------\n";
